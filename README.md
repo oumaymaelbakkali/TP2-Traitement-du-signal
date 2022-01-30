@@ -7,6 +7,7 @@
  Comprendre comment manipuler un signal audio avec Matlab, en effectuant 
 certaines opérations classiques sur un fichier audio d’une phrase enregistrée via 
 un smartphone.<br/>
+
  Comprendre la notion des sons purs à travers la synthèse et l’analyse spectrale 
 d’une gamme de musique.<br/>
 # Jeux de mots
@@ -14,7 +15,7 @@ d’une gamme de musique.<br/>
 « phrase.wave » est un fichier audio enregistré à l’aide d’un smartphone, en 
 prononçant lentement la phrase : 
          - « Rien ne sert de courir, il faut partir à point ».
-  Premierement on va charger le fichier  dans MATLAB à l’aide de la commande « audioread » puis on va Tracer le signal enregistré en fonction du temps :
+  1-Premierement on va charger le fichier  dans MATLAB à l’aide de la commande « audioread » puis on va Tracer le signal enregistré en fonction du temps :
  ```Matlab
    clear all;
    close all;
@@ -28,8 +29,27 @@ prononçant lentement la phrase :
    plot(x);
  ```
  ### Output :
- ![image](https://user-images.githubusercontent.com/93142901/151711655-4a929dfb-ff8f-4381-86f1-9167f005b524.png)
+![image](https://user-images.githubusercontent.com/93142901/151712108-29a3e6a3-e190-412f-ab6d-8c683304daec.png)<br/>
 -On remarque que la modification de la fréquence d’échantillonnage revient à appliquer 
 un changement d’échelle y(t) = x(at) en fonction de la valeur du facteur d’échelle, cela 
 revient à opérer une compression ou une dilatation du spectre initial d’où la version 
 plus grave ou plus aigüe du signal écouté.
+![image](https://user-images.githubusercontent.com/93142901/151712601-c72497f0-5e3d-4a22-b4e1-c0978b9264b7.png)<br/>
+2-A partir du signal on peut extraire les indices de début et de fin de chaque mot,et donc on peut aussi les segementer et  Réarranger la phrase:
+```Matlab
+  % segmenter la phrase rien ne sert de
+  riennesertde=x(1:74272);
+  %segmenter le mot courir 
+  courir=x(80117:93762);
+  %segmenter la phrase il faut
+  faut=x(101596:124998);
+  %segmenter la phrase  partir a point
+  partir=x(124604:N);
+  % Creer un veecteur phrase2 et Réarranger les mot  pour écouter la phrase 
+    synthétisée « Rien ne sert de partir à point, il faut courir ».
+  phrase2=[riennesertde  partir   faut  courir];
+  sound(phrase2,fs)
+```
+
+
+
